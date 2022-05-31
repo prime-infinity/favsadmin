@@ -53,7 +53,7 @@ const AdminNavbar = () => {
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      Jessica Jones
+                      Admin Name
                     </span>
                   </Media>
                 </Media>
@@ -65,13 +65,8 @@ const AdminNavbar = () => {
                   tag="div"
                 ></DropdownItem>
 
-                <DropdownItem to="/admin/user-profile" tag={Link}>
-                  <i className="ni ni-settings-gear-65" />
-                  <span>Settings</span>
-                </DropdownItem>
-
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem onClick={(e) => e.preventDefault()}>
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>

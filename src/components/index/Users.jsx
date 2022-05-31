@@ -18,8 +18,17 @@ import {
   Row,
   UncontrolledTooltip,
 } from "reactstrap";
+import { useNavigate } from "react-router-dom";
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
 function Users() {
+  let navigate = useNavigate();
+
+  const toUser = (e) => {
+    e.preventDefault();
+    navigate("/user");
+  };
+
   return (
     <>
       <Header />
@@ -39,7 +48,7 @@ function Users() {
                     <th scope="col">User</th>
                     <th scope="col">Favs</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Contacts</th>
+                    <th scope="col">Friends</th>
                     <th scope="col" />
                   </tr>
                 </thead>
@@ -50,8 +59,7 @@ function Users() {
                         <Media className="align-items-center">
                           <a
                             className="avatar rounded-circle mr-3"
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
+                            onClick={(e) => toUser(e)}
                           >
                             <img
                               alt="..."
@@ -75,7 +83,6 @@ function Users() {
                         <div className="avatar-group">
                           <a
                             className="avatar avatar-sm"
-                            href="#pablo"
                             id="tooltip742438047"
                             onClick={(e) => e.preventDefault()}
                           >
@@ -93,7 +100,6 @@ function Users() {
                           </UncontrolledTooltip>
                           <a
                             className="avatar avatar-sm"
-                            href="#pablo"
                             id="tooltip941738690"
                             onClick={(e) => e.preventDefault()}
                           >
@@ -111,7 +117,6 @@ function Users() {
                           </UncontrolledTooltip>
                           <a
                             className="avatar avatar-sm"
-                            href="#pablo"
                             id="tooltip804044742"
                             onClick={(e) => e.preventDefault()}
                           >
@@ -129,7 +134,6 @@ function Users() {
                           </UncontrolledTooltip>
                           <a
                             className="avatar avatar-sm"
-                            href="#pablo"
                             id="tooltip996637554"
                             onClick={(e) => e.preventDefault()}
                           >
@@ -152,7 +156,6 @@ function Users() {
                         <UncontrolledDropdown>
                           <DropdownToggle
                             className="btn-icon-only text-light"
-                            href="#pablo"
                             role="button"
                             size="sm"
                             color=""
@@ -161,23 +164,8 @@ function Users() {
                             <i className="fas fa-ellipsis-v" />
                           </DropdownToggle>
                           <DropdownMenu className="dropdown-menu-arrow" right>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Another action
-                            </DropdownItem>
-                            <DropdownItem
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
-                            >
-                              Something else here
+                            <DropdownItem onClick={(e) => toUser(e)}>
+                              Edit User
                             </DropdownItem>
                           </DropdownMenu>
                         </UncontrolledDropdown>
@@ -194,7 +182,6 @@ function Users() {
                   >
                     <PaginationItem className="disabled">
                       <PaginationLink
-                        href="#pablo"
                         onClick={(e) => e.preventDefault()}
                         tabIndex="-1"
                       >
@@ -203,34 +190,22 @@ function Users() {
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem className="active">
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
                         1
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
                         2 <span className="sr-only">(current)</span>
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
                         3
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
                         <i className="fas fa-angle-right" />
                         <span className="sr-only">Next</span>
                       </PaginationLink>

@@ -6,6 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Index from "./components/index/Index";
 import Users from "./components/index/Users";
+import UserProfile from "./components/index/UserProfile";
+import Products from "./components/index/Products";
+import StaticPages from "./components/index/StaticPages";
 
 import "./assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -18,6 +21,9 @@ root.render(
       <Route path="/" element={<App />}>
         <Route index element={<Index />} />
         <Route path="users" element={<Users />} />
+        <Route path="user" element={<UserProfile />} />
+        <Route path="products" element={<Products />} />
+        <Route path="static" element={<StaticPages />} />
       </Route>
     </Routes>
   </BrowserRouter>

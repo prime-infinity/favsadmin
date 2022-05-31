@@ -22,6 +22,7 @@ import {
   Col,
 } from "reactstrap";
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
 function SideBar(props) {
   const [collapseOpen, setCollapseOpen] = useState();
   // toggles collapse between opened and closed (true/false)
@@ -65,16 +66,25 @@ function SideBar(props) {
         {/* Brand */}
         {logo ? (
           <NavbarBrand className="pt-0" {...navbarBrandProps}>
-            <img
-              alt={logo.imgAlt}
-              className="navbar-brand-img"
-              src={require("../assets/img/brand/brandimg.png")}
-            />
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                style={{ width: "45px" }}
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </span>
           </NavbarBrand>
         ) : null}
         {/* User */}
         <Nav className="align-items-center d-md-none">
-          <UncontrolledDropdown nav>
+          {/*<UncontrolledDropdown nav>
             <DropdownToggle nav className="nav-link-icon">
               <i className="ni ni-bell-55" />
             </DropdownToggle>
@@ -88,7 +98,7 @@ function SideBar(props) {
               <DropdownItem divider />
               <DropdownItem>Something else here</DropdownItem>
             </DropdownMenu>
-          </UncontrolledDropdown>
+        </UncontrolledDropdown>*/}
           <UncontrolledDropdown nav>
             <DropdownToggle nav>
               <Media className="align-items-center">
@@ -101,25 +111,11 @@ function SideBar(props) {
               </Media>
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-arrow" right>
-              <DropdownItem className="noti-title" header tag="div">
-                <h6 className="text-overflow m-0">Welcome!</h6>
-              </DropdownItem>
-              <DropdownItem to="/admin/user-profile" tag={Link}>
-                <i className="ni ni-single-02" />
-                <span>My profile</span>
-              </DropdownItem>
               <DropdownItem to="/admin/user-profile" tag={Link}>
                 <i className="ni ni-settings-gear-65" />
                 <span>Settings</span>
               </DropdownItem>
-              <DropdownItem to="/admin/user-profile" tag={Link}>
-                <i className="ni ni-calendar-grid-58" />
-                <span>Activity</span>
-              </DropdownItem>
-              <DropdownItem to="/admin/user-profile" tag={Link}>
-                <i className="ni ni-support-16" />
-                <span>Support</span>
-              </DropdownItem>
+
               <DropdownItem divider />
               <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                 <i className="ni ni-user-run" />
@@ -136,19 +132,9 @@ function SideBar(props) {
               {logo ? (
                 <Col className="collapse-brand" xs="6">
                   {logo.innerLink ? (
-                    <Link to={logo.innerLink}>
-                      <img
-                        alt={logo.imgAlt}
-                        src={require("../assets/img/brand/brandimg.png")}
-                      />
-                    </Link>
+                    <Link to={logo.innerLink}></Link>
                   ) : (
-                    <a href={logo.outterLink}>
-                      <img
-                        alt={logo.imgAlt}
-                        src={require("../assets/img/brand/brandimg.png")}
-                      />
-                    </a>
+                    <a href={logo.outterLink}>a</a>
                   )}
                 </Col>
               ) : null}
@@ -182,13 +168,42 @@ function SideBar(props) {
           <Nav navbar>
             <NavItem>
               <NavLink
-                to={"/this"}
+                to={"/"}
                 tag={NavLinkRRD}
                 onClick={closeCollapse}
                 activeclassname="active"
               >
-                <i className="ni ni-spaceship" />
-                towhere
+                <span className="mr-2">
+                  <svg
+                    className="svg-icon-dash"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                  </svg>
+                </span>
+                DashBoard
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                to={"/users"}
+                tag={NavLinkRRD}
+                onClick={closeCollapse}
+                activeclassname="active"
+              >
+                <span className="mr-2">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="svg-icon-dash"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                  </svg>
+                </span>
+                Users
               </NavLink>
             </NavItem>
           </Nav>

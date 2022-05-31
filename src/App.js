@@ -24,7 +24,7 @@ function App() {
         }}
       />
       <div className="main-content" ref={mainContent}>
-        <AdminNavbar brandText={"this"} />
+        <AdminNavbar />
         <Outlet />
       </div>
     </>

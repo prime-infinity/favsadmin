@@ -8,117 +8,93 @@ const Header = () => {
           <div className="header-body">
             {/* Card stats */}
             <Row>
-              <Col lg="6" xl="3">
+              <Col lg="6" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
                       <div className="col">
                         <CardTitle
-                          tag="h5"
+                          tag="h6"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Traffic
+                          Total Users {"      "}
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
                           350,897
                         </span>
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <i className="fas fa-chart-bar" />
+                        <div className="icon icon-shape bg-dark text-white rounded-circle shadow">
+                          <span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
+                            </svg>
+                          </span>
                         </div>
                       </Col>
                     </Row>
-                    <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-arrow-up" /> 3.48%
-                      </span>{" "}
-                      <span className="text-nowrap">Since last month</span>
-                    </p>
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="6" xl="3">
+              <Col lg="6" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
                       <div className="col">
                         <CardTitle
-                          tag="h5"
+                          tag="h6"
                           className="text-uppercase text-muted mb-0"
                         >
-                          New users
+                          Total categories
                         </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">2,356</span>
+                        <span className="h2 font-weight-bold mb-0">23</span>
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
+                        <div className="icon icon-shape bg-dark text-white rounded-circle shadow">
                           <i className="fas fa-chart-pie" />
                         </div>
                       </Col>
                     </Row>
-                    <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-danger mr-2">
-                        <i className="fas fa-arrow-down" /> 3.48%
-                      </span>{" "}
-                      <span className="text-nowrap">Since last week</span>
-                    </p>
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="6" xl="3">
+              <Col lg="12" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
                       <div className="col">
                         <CardTitle
-                          tag="h5"
+                          tag="h6"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Sales
+                          Total Products
                         </CardTitle>
                         <span className="h2 font-weight-bold mb-0">924</span>
                       </div>
                       <Col className="col-auto">
-                        <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                          <i className="fas fa-users" />
+                        <div className="icon icon-shape bg-dark text-white rounded-circle shadow">
+                          <span>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="h-5 w-5"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </span>
                         </div>
                       </Col>
                     </Row>
-                    <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-warning mr-2">
-                        <i className="fas fa-arrow-down" /> 1.10%
-                      </span>{" "}
-                      <span className="text-nowrap">Since yesterday</span>
-                    </p>
-                  </CardBody>
-                </Card>
-              </Col>
-              <Col lg="6" xl="3">
-                <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
-                    <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Performance
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">49,65%</span>
-                      </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-info text-white rounded-circle shadow">
-                          <i className="fas fa-percent" />
-                        </div>
-                      </Col>
-                    </Row>
-                    <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fas fa-arrow-up" /> 12%
-                      </span>{" "}
-                      <span className="text-nowrap">Since last month</span>
-                    </p>
                   </CardBody>
                 </Card>
               </Col>

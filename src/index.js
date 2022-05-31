@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Index from "./components/index/Index";
+import Users from "./components/index/Users";
 
 import "./assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -16,6 +17,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<Index />} />
+        <Route path="users" element={<Users />} />
       </Route>
     </Routes>
   </BrowserRouter>

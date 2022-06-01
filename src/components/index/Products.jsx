@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -9,12 +10,30 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  CardFooter,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
 } from "reactstrap";
+import AddProModal from "../AddProModal";
 import Header from "../Header";
+import Overlay from "../Overlay";
 
 function Products() {
+  const [isAdding, setIsAdding] = useState(false);
+
+  const toggleIsAdding = () => {
+    setIsAdding(!isAdding);
+  };
   return (
     <>
+      {isAdding && (
+        <>
+          {" "}
+          <AddProModal close={toggleIsAdding} />{" "}
+          <Overlay closeOverlay={toggleIsAdding} />
+        </>
+      )}
       <Header />
 
       <Container className="mt--7 pb-5" fluid>
@@ -76,6 +95,11 @@ function Products() {
                                 >
                                   Delete product
                                 </DropdownItem>
+                                <DropdownItem
+                                  onClick={(e) => e.preventDefault()}
+                                >
+                                  Deactivate product
+                                </DropdownItem>
                               </DropdownMenu>
                             </UncontrolledDropdown>
                           </div>
@@ -93,10 +117,65 @@ function Products() {
                   ))}
                 </Row>
               </CardBody>
+              <CardFooter className="py-4">
+                <nav aria-label="...">
+                  <Pagination
+                    className="pagination justify-content-end mb-0"
+                    listClassName="justify-content-end mb-0"
+                  >
+                    <PaginationItem className="disabled">
+                      <PaginationLink
+                        onClick={(e) => e.preventDefault()}
+                        tabIndex="-1"
+                      >
+                        <i className="fas fa-angle-left" />
+                        <span className="sr-only">Previous</span>
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem className="active">
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
+                        1
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
+                        2 <span className="sr-only">(current)</span>
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
+                        3
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink onClick={(e) => e.preventDefault()}>
+                        <i className="fas fa-angle-right" />
+                        <span className="sr-only">Next</span>
+                      </PaginationLink>
+                    </PaginationItem>
+                  </Pagination>
+                </nav>
+              </CardFooter>
             </Card>
           </div>
         </Row>
       </Container>
+      <div className="float-add" onClick={toggleIsAdding}>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ width: "40px" }}
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </span>
+      </div>
     </>
   );
 }

@@ -4,3 +4,11 @@
 .mh-100-n{
   min-height: 50vh;
 }
+.cur-poi{
+  cursor: pointer;
+}
+.fav-image{
+  padding:7%;
+  border-radius: 50%;
+  border: 1px solid silver;
+}

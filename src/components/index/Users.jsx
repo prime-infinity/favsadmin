@@ -56,11 +56,11 @@ function Users() {
                   {[1, 2, 3, 4, 5, 6].map((user, index) => (
                     <tr key={index}>
                       <th scope="row">
-                        <Media className="align-items-center">
-                          <a
-                            className="avatar rounded-circle mr-3"
-                            onClick={(e) => toUser(e)}
-                          >
+                        <Media
+                          onClick={(e) => toUser(e)}
+                          className="align-items-center cur-poi"
+                        >
+                          <a className="avatar rounded-circle mr-3">
                             <img
                               alt="..."
                               src={require("../../assets/img/theme/isis.jpg")}
@@ -68,7 +68,7 @@ function Users() {
                           </a>
                           <Media>
                             <span className="mb-0 text-sm">
-                              Argon Design System
+                              Jane Doe {index}
                             </span>
                           </Media>
                         </Media>

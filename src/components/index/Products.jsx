@@ -1,4 +1,15 @@
-import { Card, CardHeader, CardBody, Container, Row, Col } from "reactstrap";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Container,
+  Row,
+  Col,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
 import Header from "../Header";
 
 function Products() {
@@ -41,8 +52,42 @@ function Products() {
                               />
                             </svg>
                           </span>
-                          <span>product name</span>
+                          <span>product {index}</span>
+                          <div style={{ position: "absolute", right: "12%" }}>
+                            <UncontrolledDropdown>
+                              <DropdownToggle
+                                className="btn-icon-only text-light"
+                                role="button"
+                                size="xs"
+                                color=""
+                                onClick={(e) => e.preventDefault()}
+                              >
+                                <i
+                                  className="fas fa-ellipsis-v"
+                                  style={{ fontSize: "14px" }}
+                                />
+                              </DropdownToggle>
+                              <DropdownMenu
+                                className="dropdown-menu-arrow"
+                                right
+                              >
+                                <DropdownItem
+                                  onClick={(e) => e.preventDefault()}
+                                >
+                                  Delete product
+                                </DropdownItem>
+                              </DropdownMenu>
+                            </UncontrolledDropdown>
+                          </div>
                         </div>
+                        <Row className="pt-3">
+                          <Col xs="6">
+                            <span>Male</span>
+                          </Col>
+                          <Col xs="6">
+                            <span>Bags</span>
+                          </Col>
+                        </Row>
                       </button>
                     </Col>
                   ))}

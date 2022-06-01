@@ -36,6 +36,8 @@ const AdminNavbar = () => {
               ? "products"
               : location.pathname === "/static"
               ? "static pages"
+              : location.pathname === "/categories"
+              ? "categories"
               : null}
           </Link>
           <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">

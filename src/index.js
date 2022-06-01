@@ -9,6 +9,7 @@ import Users from "./components/index/Users";
 import UserProfile from "./components/index/UserProfile";
 import Products from "./components/index/Products";
 import StaticPages from "./components/index/StaticPages";
+import Categories from "./components/index/Categories";
 
 import "./assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
@@ -24,6 +25,7 @@ root.render(
         <Route path="user" element={<UserProfile />} />
         <Route path="products" element={<Products />} />
         <Route path="static" element={<StaticPages />} />
+        <Route path="categories" element={<Categories />} />
       </Route>
     </Routes>
   </BrowserRouter>

@@ -1,9 +1,36 @@
-import { Card, CardBody, CardHeader, Col, Container, Row } from "reactstrap";
+import { useState } from "react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Container,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  Row,
+  UncontrolledDropdown,
+} from "reactstrap";
+import AddCartModal from "../AddCatModal";
 import CategoryHeader from "../CategoryHeader";
+import Overlay from "../Overlay";
 
 function Categories() {
+  const [isAdding, setIsAdding] = useState(false);
+
+  const toggleIsAdding = () => {
+    setIsAdding(!isAdding);
+  };
+
   return (
     <>
+      {isAdding && (
+        <>
+          {" "}
+          <AddCartModal close={toggleIsAdding} />{" "}
+          <Overlay closeOverlay={toggleIsAdding} />
+        </>
+      )}
       <CategoryHeader />
       <Container className="mt--7 pb-5" fluid>
         <Row className="justify-content-center">
@@ -93,8 +120,8 @@ function Categories() {
           <h1 className="text-center py-4">Sub Categories</h1>
         </div>
 
-        {[1, 2, 3].map((item) => (
-          <Row className="justify-content-center mt-5 mb-5 pb-5">
+        {[1, 2, 3].map((item, index) => (
+          <Row key={index} className="justify-content-center mt-5 mb-5 pb-5">
             <Col className="mb-5 mb-xl-0" xl="4">
               <Card className="card-profile shadow">
                 <Row className="justify-content-center">
@@ -130,10 +157,31 @@ function Categories() {
                     </div>
                   </Row>
                   <Row>
-                    <Col xs="6 text-center">
+                    <Col xs="5 text-center">
                       <h3>Bags</h3>
                     </Col>
-                    <Col xs="6 text-center">
+                    <Col xs="2">
+                      <UncontrolledDropdown>
+                        <DropdownToggle
+                          className="btn-icon-only text-light"
+                          role="button"
+                          size="xs"
+                          color=""
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <i
+                            className="fas fa-ellipsis-v"
+                            style={{ fontSize: "14px" }}
+                          />
+                        </DropdownToggle>
+                        <DropdownMenu className="dropdown-menu-arrow" right>
+                          <DropdownItem onClick={(e) => e.preventDefault()}>
+                            Delete category
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                    </Col>
+                    <Col xs="5 text-center">
                       <h3>Female</h3>
                     </Col>
                   </Row>
@@ -175,10 +223,31 @@ function Categories() {
                     </div>
                   </Row>
                   <Row>
-                    <Col xs="6 text-center">
+                    <Col xs="5 text-center">
                       <h3>Tops</h3>
                     </Col>
-                    <Col xs="6 text-center">
+                    <Col xs="2">
+                      <UncontrolledDropdown>
+                        <DropdownToggle
+                          className="btn-icon-only text-light"
+                          role="button"
+                          size="xs"
+                          color=""
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <i
+                            className="fas fa-ellipsis-v"
+                            style={{ fontSize: "14px" }}
+                          />
+                        </DropdownToggle>
+                        <DropdownMenu className="dropdown-menu-arrow" right>
+                          <DropdownItem onClick={(e) => e.preventDefault()}>
+                            Delete category
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                    </Col>
+                    <Col xs="5 text-center">
                       <h3>Female</h3>
                     </Col>
                   </Row>
@@ -220,10 +289,31 @@ function Categories() {
                     </div>
                   </Row>
                   <Row>
-                    <Col xs="6 text-center">
+                    <Col xs="5 text-center">
                       <h3>Trousers</h3>
                     </Col>
-                    <Col xs="6 text-center">
+                    <Col xs="2">
+                      <UncontrolledDropdown>
+                        <DropdownToggle
+                          className="btn-icon-only text-light"
+                          role="button"
+                          size="xs"
+                          color=""
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          <i
+                            className="fas fa-ellipsis-v"
+                            style={{ fontSize: "14px" }}
+                          />
+                        </DropdownToggle>
+                        <DropdownMenu className="dropdown-menu-arrow" right>
+                          <DropdownItem onClick={(e) => e.preventDefault()}>
+                            Delete category
+                          </DropdownItem>
+                        </DropdownMenu>
+                      </UncontrolledDropdown>
+                    </Col>
+                    <Col xs="5 text-center">
                       <h3>Male</h3>
                     </Col>
                   </Row>
@@ -233,6 +323,23 @@ function Categories() {
           </Row>
         ))}
       </Container>
+
+      <div className="float-add" onClick={toggleIsAdding}>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ width: "40px" }}
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+        </span>
+      </div>
     </>
   );
 }

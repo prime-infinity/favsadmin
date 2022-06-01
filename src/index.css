@@ -39,3 +39,7 @@
   background-color: white;
   z-index: 3;
 }
+.cover-rest-login{
+  min-height: 100vh;
+  background-color: #192c4e;
+}

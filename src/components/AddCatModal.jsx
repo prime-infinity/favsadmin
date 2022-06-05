@@ -1,14 +1,67 @@
 import { Button, FormGroup, Input } from "reactstrap";
 import Select from "react-select";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import ImageUploading from "react-images-uploading";
+import { saveSubCat } from "../helpers/web";
+import { addToSubCat } from "../redux/slices/categorySilce";
 
-const options = [
-  { value: "male", label: "male" },
-  { value: "female", label: "female" },
-];
-
-function AddCartModal() {
+function AddCartModal({ close }) {
+  const dispatch = useDispatch();
   const [selectedOption, setSelectedOption] = useState(null);
+  const main = useSelector((state) => state.category.main);
+  const authState = useSelector((state) => state.auth.auth);
+  const [subName, setSubName] = useState("");
+  const [isUploadingSub, setIsUploadingSub] = useState(false);
+  const [imaUpLdErr, setImgErr] = useState(null);
+  const [isAddinSub, setAddingSub] = useState(false);
+  const [images, setImages] = useState([]);
+  const maxNumber = 1;
+
+  const imgErrorDiv = <small className="text-danger">{imaUpLdErr}</small>;
+
+  const onChange = (imageList, addUpdateIndex) => {
+    setImages(imageList);
+    setAddingSub(true);
+  };
+
+  const selectOptions = main.map((man) => ({
+    value: man._id,
+    label: man.name,
+  }));
+
+  const uploadSub = () => {
+    setIsUploadingSub(true);
+    setImgErr(null);
+
+    const imageAsArray = images.map((img) => img.file);
+
+    const formData = new FormData();
+
+    for (let i = 0; i < imageAsArray.length; i++) {
+      formData.append("image", imageAsArray[i], imageAsArray[i].name);
+    }
+
+    formData.append("name", subName);
+    formData.append("maincat", selectedOption.value);
+
+    saveSubCat(formData, authState.token)
+      .then((res) => {
+        console.log(res);
+        dispatch(addToSubCat(res));
+        setIsUploadingSub(false);
+        alert("sub category added");
+        close();
+      })
+      .catch((err) => {
+        setIsUploadingSub(false);
+        err.response?.data
+          ? setImgErr(err.response.data)
+          : setImgErr(err.message);
+      });
+  };
+
+  //console.log(selectedOption);
 
   return (
     <div
@@ -18,22 +71,79 @@ function AddCartModal() {
       <div className="container-fluid px-3">
         <div className="row py-4">
           <div className="col-12 col-md-6 text-center">
-            <span className="cur-poi">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                style={{ width: "300px" }}
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                  clipRule="evenodd"
-                />
-              </svg>{" "}
-            </span>
+            <h3>Add Sub Category</h3>
+
+            <ImageUploading
+              value={images}
+              onChange={onChange}
+              maxNumber={maxNumber}
+              dataURLKey="data_url"
+              acceptType={["jpg", "jpeg"]}
+            >
+              {({ imageList, onImageUpload, errors }) => (
+                //building UI
+
+                <div>
+                  {!isAddinSub && (
+                    <svg
+                      onClick={onImageUpload}
+                      xmlns="http://www.w3.org/2000/svg"
+                      style={{ width: "300px" }}
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      className="cur-poi"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  )}
+
+                  {isAddinSub &&
+                    imageList.map((image, index) => (
+                      <div key={index}>
+                        <img
+                          alt="..."
+                          className="img-fluid"
+                          src={image["data_url"]}
+                        />
+                      </div>
+                    ))}
+
+                  {errors && (
+                    <div
+                      className="text-danger"
+                      style={{
+                        position: "absolute",
+                        backgroundColor: "black",
+                        color: "white !important",
+                      }}
+                    >
+                      {errors.maxNumber && (
+                        <span className="row">
+                          Number of selected images exceed {maxNumber}
+                        </span>
+                      )}
+                      {errors.acceptType && (
+                        <span className="row">
+                          Your selected file type is not allow
+                        </span>
+                      )}
+                      {errors.maxFileSize && (
+                        <span className="row">
+                          Selected file size exceed maxFileSize
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+            </ImageUploading>
+
             <br />
-            <span className="text-center">Add image</span>
+            <span className="text-center">Click icon to add image</span>
           </div>
           <div className="col-12 col-md-4">
             <FormGroup>
@@ -45,23 +155,41 @@ function AddCartModal() {
                 id="input-email"
                 placeholder="input name"
                 type="text"
+                value={subName}
+                onChange={(e) => setSubName(e.target.value)}
               />
               <br />
               <Select
                 defaultValue={selectedOption}
                 onChange={setSelectedOption}
-                options={options}
+                options={selectOptions}
                 placeholder="select main category"
               />
               <br />
-              <Button
-                color="primary"
-                onClick={(e) => e.preventDefault()}
-                size="md"
-                className="w-100"
-              >
-                save category
-              </Button>
+              <div className="">{imaUpLdErr ? imgErrorDiv : null}</div>
+              {subName && selectedOption && isAddinSub && (
+                <>
+                  {!isUploadingSub && (
+                    <Button
+                      color="primary"
+                      onClick={uploadSub}
+                      size="md"
+                      className="w-100"
+                    >
+                      save category
+                    </Button>
+                  )}
+                  {isUploadingSub && (
+                    <div className="text-center">
+                      <span
+                        className="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                    </div>
+                  )}
+                </>
+              )}
             </FormGroup>
           </div>
         </div>

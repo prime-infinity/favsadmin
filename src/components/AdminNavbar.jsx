@@ -16,10 +16,19 @@ import {
   Container,
   Media,
 } from "reactstrap";
+import { removeFromLocal } from "../helpers/storage";
+import { setAuth } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const AdminNavbar = () => {
   const location = useLocation();
-  console.log(location.pathname);
+  const dispatch = useDispatch();
+  const logout = () => {
+    console.log("is logging out");
+    dispatch(setAuth(null));
+    removeFromLocal();
+  };
+
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -77,9 +86,9 @@ const AdminNavbar = () => {
                 ></DropdownItem>
 
                 <DropdownItem divider />
-                <DropdownItem onClick={(e) => e.preventDefault()}>
+                <DropdownItem onClick={logout}>
                   <i className="ni ni-user-run" />
-                  <span>Logout</span>
+                  <span>Logoutt</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>

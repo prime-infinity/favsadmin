@@ -1,22 +1,30 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation, Outlet, useNavigate } from "react-router-dom";
 
 import AdminNavbar from "./components/AdminNavbar";
 import SideBar from "./components/SideBar";
+import { getAuth } from "./redux/slices/authSlice";
+import { getMainCat, getSubCat } from "./redux/slices/categorySilce";
 
 function App() {
   const mainContent = React.useRef(null);
   const location = useLocation();
   let navigate = useNavigate();
   const authState = useSelector((state) => state.auth.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(authState);
-    if (authState === false) {
+    dispatch(getAuth());
+    dispatch(getMainCat());
+    dispatch(getSubCat());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!authState) {
       navigate(`/login`);
     }
-    if (authState === true) {
+    if (authState) {
       navigate(`/`);
     }
     // eslint-disable-next-line

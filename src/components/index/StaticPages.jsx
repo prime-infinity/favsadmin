@@ -1,8 +1,6 @@
 import StaticHeader from "../StaticHeader";
-import { Editor } from "react-draft-wysiwyg";
-import { EditorState } from "draft-js";
-
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import {
   Button,
   Card,
@@ -17,18 +15,16 @@ import {
 import React, { Component } from "react";
 
 class StaticPages extends Component {
-  state = {
-    editorState: EditorState.createEmpty(),
-  };
+  constructor(props) {
+    super(props);
+    this.state = { text: "" }; // You can also pass a Quill Delta here
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-  onEditorStateChange = (editorState) => {
-    this.setState({
-      editorState,
-    });
-  };
-
+  handleChange(value) {
+    this.setState({ text: value });
+  }
   render() {
-    const { editorState } = this.state;
     return (
       <>
         <StaticHeader />
@@ -68,11 +64,9 @@ class StaticPages extends Component {
                             >
                               Enter New Terms and Conditions
                             </label>
-                            <Editor
-                              editorState={editorState}
-                              wrapperClassName="demo-wrapper border bg-white px-2 mh-100-n"
-                              editorClassName="demo-editor"
-                              onEditorStateChange={this.onEditorStateChange}
+                            <ReactQuill
+                              value={this.state.text}
+                              onChange={this.handleChange}
                             />
                           </FormGroup>
                         </Col>

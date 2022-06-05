@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -16,30 +16,62 @@ import {
   Col,
   Container,
 } from "reactstrap";
-import { setAuth } from "../redux/slices/authSlice";
+import { login } from "../helpers/web";
+import { setAuth, saveAuthToLocal, getAuth } from "../redux/slices/authSlice";
 import AuthNavbar from "./AuthNavbar";
 
 const Login = () => {
   const mainContent = React.useRef(null);
   const authState = useSelector((state) => state.auth.auth);
-
   const dispatch = useDispatch();
   let navigate = useNavigate();
+  const [error, setErrors] = useState(null);
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+  const [isLoging, setIsLoging] = useState(false);
 
   useEffect(() => {
-    console.log(authState);
-    if (authState === false) {
+    dispatch(getAuth());
+  }, [dispatch]);
+
+  useEffect(() => {
+    //console.log(authState);
+    if (!authState) {
       navigate(`/login`);
     }
-    if (authState === true) {
+    if (authState) {
       navigate(`/`);
     }
     // eslint-disable-next-line
   }, [authState]);
 
-  const signIn = () => {
-    dispatch(setAuth(true));
+  const handleErrors = (e) => {
+    e.response?.data ? setErrors(e.response.data) : setErrors(e.message);
   };
+
+  const handleSuccess = (e) => {
+    dispatch(setAuth(e));
+    dispatch(saveAuthToLocal());
+  };
+
+  const signIn = () => {
+    //dispatch(setAuth(true));
+    setIsLoging(true);
+    setErrors(null);
+    login(formData)
+      .then((res) => {
+        handleSuccess(res);
+      })
+      .catch((err) => {
+        handleErrors(err);
+      })
+      .then(() => {
+        setIsLoging(false);
+      });
+  };
+  const errorDiv = <small className="text-danger">{error}</small>;
 
   return (
     <>
@@ -82,13 +114,19 @@ const Login = () => {
                       <InputGroup className="input-group-alternative">
                         <InputGroupAddon addonType="prepend">
                           <InputGroupText>
-                            <i className="ni ni-email-83" />
+                            <i className="ni ni-circle-08" />
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          placeholder="Email"
-                          type="email"
-                          autoComplete="new-email"
+                          value={formData.id}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              username: e.target.value,
+                            })
+                          }
+                          placeholder="Username"
+                          type="text"
                         />
                       </InputGroup>
                     </FormGroup>
@@ -100,6 +138,13 @@ const Login = () => {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
+                          value={formData.password}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              password: e.target.value,
+                            })
+                          }
                           placeholder="Password"
                           type="password"
                           autoComplete="new-password"
@@ -119,15 +164,28 @@ const Login = () => {
                         <span className="text-muted">Remember me</span>
                       </label>
   </div>*/}
+                    <div className="row text-center">
+                      <div className="col-12">{error ? errorDiv : null}</div>
+                    </div>
                     <div className="text-center">
-                      <Button
-                        onClick={signIn}
-                        className="my-4"
-                        color="primary"
-                        type="button"
-                      >
-                        Sign in
-                      </Button>
+                      {!isLoging && (
+                        <Button
+                          onClick={signIn}
+                          className="my-4"
+                          color="primary"
+                          type="button"
+                          size="md"
+                        >
+                          Sign in
+                        </Button>
+                      )}
+                      {isLoging && (
+                        <span
+                          className="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                      )}
                     </div>
                   </Form>
                 </CardBody>

@@ -21,6 +21,9 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import { removeFromLocal } from "../helpers/storage";
+import { setAuth } from "../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 function SideBar(props) {
@@ -34,6 +37,7 @@ function SideBar(props) {
     setCollapseOpen(false);
   };
 
+  const dispatch = useDispatch();
   const { logo } = props;
   let navbarBrandProps;
   if (logo && logo.innerLink) {
@@ -47,6 +51,12 @@ function SideBar(props) {
       target: "_blank",
     };
   }
+
+  const logout = () => {
+    console.log("is logging out");
+    dispatch(setAuth(null));
+    removeFromLocal();
+  };
 
   return (
     <Navbar
@@ -112,7 +122,7 @@ function SideBar(props) {
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-arrow" right>
               <DropdownItem divider />
-              <DropdownItem onClick={(e) => e.preventDefault()}>
+              <DropdownItem onClick={logout}>
                 <i className="ni ni-user-run" />
                 <span>Logout</span>
               </DropdownItem>

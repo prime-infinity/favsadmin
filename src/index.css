@@ -1,6 +1,10 @@
 .svg-icon-dash{
   width: 24px;
 }
+.svg-icon {
+  width: 25px;
+  vertical-align: sub;
+}
 .mh-100-n{
   min-height: 50vh;
 }
@@ -42,4 +46,11 @@
 .cover-rest-login{
   min-height: 100vh;
   background-color: #192c4e;
+}
+.mimick-card-img{
+  width: 180px;
+  position: absolute;
+  transform: translate(-50%, -30%);
+  left: 50%;
+  transition: all 0.15s ease;
 }

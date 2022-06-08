@@ -5,7 +5,9 @@ import { useLocation, Outlet, useNavigate } from "react-router-dom";
 import AdminNavbar from "./components/AdminNavbar";
 import SideBar from "./components/SideBar";
 import { getAuth } from "./redux/slices/authSlice";
-import { getMainCat, getSubCat } from "./redux/slices/categorySilce";
+import {
+  getCat /*, getMainCat, getSubCat*/,
+} from "./redux/slices/categorySilce";
 
 function App() {
   const mainContent = React.useRef(null);
@@ -16,8 +18,9 @@ function App() {
 
   useEffect(() => {
     dispatch(getAuth());
-    dispatch(getMainCat());
-    dispatch(getSubCat());
+    /*dispatch(getMainCat());
+    dispatch(getSubCat());*/
+    dispatch(getCat());
   }, [dispatch]);
 
   useEffect(() => {

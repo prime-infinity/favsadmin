@@ -1,7 +1,6 @@
 import axios from "axios";
 
-//const backendHost = "http://localhost:2000/api/";
-const backendHost = "https://favsadmin.herokuapp.com/api/";
+const backendHost = "http://localhost:2000/api/";
 
 //login admin
 export function login(data) {
@@ -21,7 +20,7 @@ export function login(data) {
 export function saveMainCat(deta, token) {
   return new Promise((res, rej) => {
     axios
-      .post(backendHost + "categories/upload-main-category", deta, {
+      .post(backendHost + "categories/create-main-category", deta, {
         headers: {
           "x-auth-token": token,
           "Content-Type": "multipart/form-data",
@@ -40,7 +39,25 @@ export function saveMainCat(deta, token) {
 export function saveSubCat(deta, token) {
   return new Promise((res, rej) => {
     axios
-      .post(backendHost + "categories/upload-sub-category", deta, {
+      .post(backendHost + "categories/create-sub-category", deta, {
+        headers: {
+          "x-auth-token": token,
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((result) => {
+        res(result.data);
+      })
+      .catch((err) => {
+        rej(err);
+      });
+  });
+}
+
+export function saveSubSubCat(deta, token) {
+  return new Promise((res, rej) => {
+    axios
+      .post(backendHost + "categories/create-sub-sub-category", deta, {
         headers: {
           "x-auth-token": token,
           "Content-Type": "multipart/form-data",
@@ -73,6 +90,17 @@ export async function getSubCategories() {
     const { data } = await axios.get(
       backendHost + `categories/get-sub-categories`
     );
+    return data;
+  } catch (e) {
+    return e.message;
+  }
+}
+
+//get cats
+//get all main categories
+export async function getCategories() {
+  try {
+    const { data } = await axios.get(backendHost + `categories/get-categories`);
     return data;
   } catch (e) {
     return e.message;

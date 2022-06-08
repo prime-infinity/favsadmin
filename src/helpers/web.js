@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const backendHost = "http://localhost:2000/api/";
+//const backendHost = "http://localhost:2000/api/";
+const backendHost = "https://favsadmin.herokuapp.com/api/";
 
 //login admin
 export function login(data) {
